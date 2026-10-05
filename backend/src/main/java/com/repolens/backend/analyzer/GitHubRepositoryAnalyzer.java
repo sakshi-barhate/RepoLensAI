@@ -40,7 +40,6 @@ public class GitHubRepositoryAnalyzer {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
         try {
-
             ResponseEntity<GitHubApiResponse> response =
                     restTemplate.exchange(
                             apiUrl,
@@ -70,19 +69,15 @@ public class GitHubRepositoryAnalyzer {
                     .build();
 
         } catch (HttpClientErrorException e) {
-
             System.err.println(
                     "GitHub API unavailable: " + e.getStatusCode()
             );
-
             return null;
 
         } catch (Exception e) {
-
             System.err.println(
                     "GitHub API request failed: " + e.getMessage()
             );
-
             return null;
         }
     }
@@ -110,7 +105,6 @@ public class GitHubRepositoryAnalyzer {
         HttpEntity<Void> entity = new HttpEntity<>(headers);
 
         try {
-
             restTemplate.exchange(
                     apiUrl,
                     HttpMethod.GET,
@@ -121,12 +115,19 @@ public class GitHubRepositoryAnalyzer {
             return true;
 
         } catch (HttpClientErrorException.NotFound e) {
-
             return false;
+
+        } catch (HttpClientErrorException e) {
+            throw new IllegalStateException(
+                    "GitHub API returned " + e.getStatusCode(),
+                    e
+            );
 
         } catch (Exception e) {
-
-            return false;
+            throw new IllegalStateException(
+                    "Could not check the repository with GitHub API",
+                    e
+            );
         }
     }
 }
