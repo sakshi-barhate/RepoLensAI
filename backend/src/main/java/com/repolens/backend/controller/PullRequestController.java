@@ -11,8 +11,9 @@ import java.util.List;
 
 @CrossOrigin(
         origins = {
-                "http://localhost:5173",
-                "http://localhost:5174"
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "https://repo-lens-ai-puce.vercel.app"
         }
 )
 @RestController
