@@ -22,7 +22,7 @@ public class GeminiServiceImpl implements GeminiService {
                     .build();
 
             GenerateContentResponse response = client.models.generateContent(
-                    "gemini-2.5-flash",
+                    "gemini-3.8-flash",
                     prompt,
                     null
             );
