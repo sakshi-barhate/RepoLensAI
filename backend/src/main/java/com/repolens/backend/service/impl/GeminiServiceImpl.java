@@ -15,7 +15,6 @@ public class GeminiServiceImpl implements GeminiService {
 
     @Override
     public String generateRepositorySummary(String prompt) {
-
         try {
             Client client = Client.builder()
                     .apiKey(geminiConfig.getApiKey())
@@ -33,10 +32,10 @@ public class GeminiServiceImpl implements GeminiService {
                 return response.text().trim();
             }
 
+            System.err.println("Gemini returned an empty response.");
             return "AI summary is currently unavailable.";
 
         } catch (Exception e) {
-
             String message = e.getMessage();
 
             if (message != null && message.contains("429")) {
@@ -44,7 +43,6 @@ public class GeminiServiceImpl implements GeminiService {
             }
 
             System.err.println("Gemini API error: " + message);
-
             return "AI summary is currently unavailable.";
         }
     }
