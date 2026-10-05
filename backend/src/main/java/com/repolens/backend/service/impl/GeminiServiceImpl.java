@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class GeminiServiceImpl implements GeminiService {
 
     private static final String PRIMARY_MODEL = "gemini-3.8-flash";
-    private static final String FALLBACK_MODEL = "gemini-3.7-flash";
+    private static final String FALLBACK_MODEL = "gemini-3.5-flash-lite";
 
     @Autowired
     private GeminiConfig geminiConfig;
@@ -86,6 +86,7 @@ public class GeminiServiceImpl implements GeminiService {
                         PRIMARY_MODEL + " is still busy; trying "
                                 + FALLBACK_MODEL + "."
                 );
+
                 return client.models.generateContent(
                         FALLBACK_MODEL,
                         prompt,
